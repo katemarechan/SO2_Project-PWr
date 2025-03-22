@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <ctime>
 #include <iomanip>
+#include <memory>
 
 
 #include "philosopher.h"
@@ -13,8 +14,8 @@
 #define NUM_PHILOSOPHERS 5
 
 // Global variables
-std::array<Philosopher*, NUM_PHILOSOPHERS> philosophers;
-std::array<Chopstick*, NUM_PHILOSOPHERS> chopsticks;
+std::array<std::unique_ptr<Philosopher>, NUM_PHILOSOPHERS> philosophers;
+std::array<std::unique_ptr<Chopstick>, NUM_PHILOSOPHERS> chopsticks;
 std::mutex console_mutex; // Mutex for console output
 
 // Names of philosophers
@@ -72,16 +73,17 @@ void quit(int signal) {
 int main() {
     // Seed the random number generator
     std::srand(static_cast<unsigned int>(std::time(nullptr)));
-
+    
     std::cout << "=== Dining Philosophers Problem Simulation ===" << std::endl;
     std::cout << "Press Ctrl+C to end the dinner" << std::endl;
     std::cout << "Each philosopher will eat 5 times" << std::endl;
-
+    
     // Create chopsticks with numeric IDs
+    // Changed to use make_unique instead of new
     for (int i = 0; i < NUM_PHILOSOPHERS; i++) {
-        chopsticks[i] = new Chopstick("Chopstick " + std::to_string(i), i);
+        chopsticks[i] = std::make_unique<Chopstick>("Chopstick " + std::to_string(i), i);
     }
-
+    
     // Create philosophers and assign chopsticks
     std::cout << "\n=== Philosophers at the table: ===" << std::endl;
     for (int i = 0; i < NUM_PHILOSOPHERS; i++) {
@@ -89,17 +91,16 @@ int main() {
         // For philosopher i, left chopstick is i, right chopstick is (i+1)%NUM_PHILOSOPHERS
         int left_idx = i;
         int right_idx = (i + 1) % NUM_PHILOSOPHERS;
-
-        // Create the philosopher with identifier prefix
-        philosophers[i] = new Philosopher(
-                identifiers[i] + " " + names[i],
-                5, // appetite - how many times they need to eat
-                *chopsticks[left_idx],
-                *chopsticks[right_idx],
-                console_mutex
+        
+        // Changed to use make_unique instead of new
+        philosophers[i] = std::make_unique<Philosopher>(
+            identifiers[i] + " " + names[i],
+            5, // appetite - how many times they need to eat
+            *chopsticks[left_idx],
+            *chopsticks[right_idx],
+            console_mutex
         );
     }
-
     // Display the arrangement
     visualizeArrangement();
 
@@ -124,12 +125,6 @@ int main() {
     }
 
     std::cout << "\n=== Everyone has finished eating! ===" << std::endl;
-
-    // Clean up
-    for (int i = 0; i < NUM_PHILOSOPHERS; i++) {
-        delete philosophers[i];
-        delete chopsticks[i];
-    }
 
     return 0;
 }
