@@ -1,5 +1,5 @@
-#ifndef PHILOSOPHER_HPP
-#define PHILOSOPHER_HPP
+#ifndef PHILOSOPHER_H
+#define PHILOSOPHER_H
 
 #include <string>
 #include <thread>
@@ -59,4 +59,4 @@ public:
     void join();
 };
 
-#endif // PHILOSOPHER_HPP
+#endif // PHILOSOPHER_H
