@@ -10,24 +10,24 @@ On each side of the Philosophers, aka between each 2 Philosophers, there are cho
 The main problem is that if all philosophers pick up their left chopstick simultaneously, no one can pick up their right chopstick, and everyone is stuck waiting forever (deadlock).
 
 Below is the Philosophers life-cycle:
-Philosopher thinks for some time
-Philosopher gets hungry
-Philosopher attempts to acquire the left chopstick
-Philosopher attempts to acquire the right chopstick
-If both acquired, philosopher eats for some time
-Philosopher puts down both chopsticks
-Philosopher returns to thinking
-Cycle repeats
+1. Philosopher thinks for some time
+2. Philosopher gets hungry
+3. Philosopher attempts to acquire the left chopstick
+4. Philosopher attempts to acquire the right chopstick
+5. If both acquired, philosopher eats for some time
+6. Philosopher puts down both chopsticks
+7. Philosopher returns to thinking
+8. Cycle repeats
 
 As in each project, there might be some potential problems, in this instance it's a phenomenon called deadlock, and another one is 'starvation'.
-Deadlock: All philosophers could pick up their left chopstick and wait forever for the right one
-Starvation: Some philosophers might never get to eat if their neighbors are greedy
+1. Deadlock: All philosophers could pick up their left chopstick and wait forever for the right one
+2. Starvation: Some philosophers might never get to eat if their neighbors are greedy
 
 There are a few solutions to the deadlock and starvation problems, here are some examples below:
-Number the chopsticks and require philosophers to pick them up in numerical order
-Use a "waiter" who controls which philosophers can pick up chopsticks
-Allow only 4 philosophers at the table at once
-Put down chopsticks if you can't get both within a timeout period
+1. Number the chopsticks and require philosophers to pick them up in numerical order
+2. Use a "waiter" who controls which philosophers can pick up chopsticks
+3. Allow only 4 philosophers at the table at once
+4. Put down chopsticks if you can't get both within a timeout period
 
 
 In this project, a few solutions were implemented to prevent deadlock and starvation. Resource hierarchy was used by numbering chopsticks and requiring philosophers to always pick up the lower-numbered chopstick first. Random thinking and eating durations were implemented to naturally stagger philosopher activities. Mutexes ensure exclusive access to chopsticks, preventing simultaneous use. The combination of these techniques guarantees that all philosophers can complete their meals without system deadlock.
