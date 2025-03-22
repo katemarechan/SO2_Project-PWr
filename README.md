@@ -5,7 +5,7 @@ Projekt na przedmiot Systemy Operacyjne 2, semestr 6, IGM, komentarze/readme po 
 This project has code for the Dining Philosophers Problem. 
 The idea of the problem is that there are some philosophers around the table (for the sake of the example, we will say there are 5 of them)
 5 philosophers are hungry and they are sitting at the table
-On each side of the Philosophers, aka between each 2 Philosophers, there are chopsticks/fork. In the middle of the table theres a bowl of food. The philisophers are hungry and to eat, they require both chopsticks, both from left and right. But they cant eat when one of the chopsticks is being used. The idle state of philisopher is usually called "thinking". After eating, they put their forks down and return to thinking, letting others use the forks. 
+On each side of the Philosophers, aka between each 2 Philosophers, there are chopsticks/fork. In the middle of the table theres a bowl of food. The philisophers are hungry and to eat, they require both chopsticks, both from left and right. But they cant eat when one of the chopsticks is being used. The idle state of philisopher is usually called "thinking". After eating, they put their chopsticks down and return to thinking, letting others use the chopsticks/forks. 
 
 The main problem is that if all philosophers pick up their left chopstick simultaneously, no one can pick up their right chopstick, and everyone is stuck waiting forever (deadlock).
 
