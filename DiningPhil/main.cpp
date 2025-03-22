@@ -56,7 +56,6 @@ void visualizeArrangement() {
 
 /**
  * Signal handler for Ctrl+C
- * Stops all philosophers gracefully
  */
 void quit(int signal) {
     std::cout << "\n=== Dinner is over! Philosophers finishing... ===" << std::endl;
