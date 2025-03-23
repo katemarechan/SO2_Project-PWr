@@ -65,6 +65,6 @@ The program also has 2 cases (Changed to meet the requirements of the project):
 1st mode: Default 5 philosophers with visualization of the table and chopsticks
 2nd mode: The program is asking for the input number of the philosophers, then writes the output for the dining process, writing their names as "Phil. 6", "Phil. 7" etc when there's more than 5 of them. The program has been checked on the following number of philosophers and worked correctly: 5, 7, 8. As described above, the implementation allows the scenario where 2 philosophers can eat at the same time if the chopstics are available, which also prevents the deadlock scenario when possible. 
 
-To run the project one can either copy all the classes and place them into the CLion and build the project there, or run command ""
+To run the project one can either copy all the classes and place them into the CLion and build the project there, or run command "g++ -o dining_philosophers main.cpp philosopher.cpp chopstick.cpp -std=c++11 -pthread" or by running the executable file that has been added to the folder.
 
 Thanks for reading :3
