@@ -61,4 +61,10 @@ Implementation: Each philosopher's print method uses a lock guard to ensure excl
 
 In this project, a few solutions were implemented to prevent deadlock and starvation. Resource hierarchy was used by numbering chopsticks and requiring philosophers to always pick up the lower-numbered chopstick first. Random thinking and eating durations were implemented to naturally stagger philosopher activities. Mutexes ensure exclusive access to chopsticks, preventing simultaneous use. The combination of these techniques guarantees that all philosophers can complete their meals without system deadlock.
 
+The program also has 2 cases (Changed to meet the requirements of the project):
+1st mode: Default 5 philosophers with visualization of the table and chopsticks
+2nd mode: The program is asking for the input number of the philosophers, then writes the output for the dining process, writing their names as "Phil. 6", "Phil. 7" etc when there's more than 5 of them. The program has been checked on the following number of philosophers and worked correctly: 5, 7, 8. As described above, the implementation allows the scenario where 2 philosophers can eat at the same time if the chopstics are available, which also prevents the deadlock scenario when possible. 
+
+To run the project one can either copy all the classes and place them into the CLion and build the project there, or run command ""
+
 Thanks for reading :3
