@@ -36,4 +36,29 @@ After running the project, which one can do by copying the code from all the .cp
 
 In the project, theres also a pretty simple, yet informative menu and display in the terminal about the process of the dinner, and at the start a visualization of the dining table with the philosophers and chopsticks.
 
+Implementation details:
+Threads and Their Representation
+
+Philosopher Threads: Each philosopher is represented by a separate thread (std::thread td in the Philosopher class). These threads alternate between thinking and eating operations.
+Main Thread: Manages the creation of philosophers and chopsticks, monitors the simulation, and handles program termination.
+
+In the project, mutex and threads were used as the premade/ready functions.
+
+Critical Sections and Solutions:
+
+Chopstick Access (Primary Critical Section)
+
+Problem: Multiple philosophers attempting to use the same chopstick simultaneously.
+Solution: Each chopstick has a mutex (std::mutex mtx) that ensures exclusive access. A philosopher must acquire the mutex lock before using the chopstick.
+Implementation: Resource hierarchy solution where philosophers always pick up the lower-numbered chopstick first, breaking the circular wait condition necessary for deadlock.
+
+Console Output (Secondary Critical Section)
+
+Problem: Multiple threads (philosophers) writing to the console simultaneously, causing interleaved output.
+Solution: A global mutex (console_mutex) ensures that only one philosopher can write to the console at a time.
+Implementation: Each philosopher's print method uses a lock guard to ensure exclusive access to the console.
+
+
+In this project, a few solutions were implemented to prevent deadlock and starvation. Resource hierarchy was used by numbering chopsticks and requiring philosophers to always pick up the lower-numbered chopstick first. Random thinking and eating durations were implemented to naturally stagger philosopher activities. Mutexes ensure exclusive access to chopsticks, preventing simultaneous use. The combination of these techniques guarantees that all philosophers can complete their meals without system deadlock.
+
 Thanks for reading :3
