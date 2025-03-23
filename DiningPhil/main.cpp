@@ -6,7 +6,7 @@
 #include <ctime>
 #include <iomanip>
 #include <memory>
-
+#include <vector> 
 
 #include "philosopher.h"
 
@@ -14,12 +14,13 @@
 #define NUM_PHILOSOPHERS 5
 
 // Global variables
-std::array<std::unique_ptr<Philosopher>, NUM_PHILOSOPHERS> philosophers;
-std::array<std::unique_ptr<Chopstick>, NUM_PHILOSOPHERS> chopsticks;
+// Changed from fixed arrays to vectors for dynamic sizing (before were arrays, bc the number was fixed (5))
+std::vector<std::unique_ptr<Philosopher>> philosophers;
+std::vector<std::unique_ptr<Chopstick>> chopsticks;
 std::mutex console_mutex; // Mutex for console output
 
-// Names of philosophers
-std::array<std::string, NUM_PHILOSOPHERS> names = {
+// Names of default 5 philosophers
+std::array<std::string, DEFAULT_PHILOSOPHERS> defaultNames  = {
         "Plato",
         "Socrates",
         "Kant",
@@ -28,7 +29,7 @@ std::array<std::string, NUM_PHILOSOPHERS> names = {
 };
 
 // Identifiers for display
-std::array<std::string, NUM_PHILOSOPHERS> identifiers = {
+std::array<std::string, DEFAULT_PHILOSOPHERS> defaultIdentifiers = {
         "[P]", // Plato
         "[S]", // Socrates
         "[K]", // Kant
@@ -37,7 +38,7 @@ std::array<std::string, NUM_PHILOSOPHERS> identifiers = {
 };
 
 /**
- * Display a visualization of the table arrangement
+ * Display a visualization of the table arrangement for 5 philosophers
  */
 void visualizeArrangement() {
     std::cout << "\n=== Table Arrangement Visualization ===" << std::endl;
@@ -70,19 +71,25 @@ void quit(int signal) {
  * Main function
  */
 int main() {
-    // Seed the random number generator
+    // Seed the random number generator (used for the amount of time to think and time to eat)
     std::srand(static_cast<unsigned int>(std::time(nullptr)));
     
     std::cout << "=== Dining Philosophers Problem Simulation ===" << std::endl;
     std::cout << "Press Ctrl+C to end the dinner" << std::endl;
-    std::cout << "Each philosopher will eat 5 times" << std::endl;
     
-    // Create chopsticks with numeric IDs
-    // Changed to use make_unique instead of new
-    for (int i = 0; i < NUM_PHILOSOPHERS; i++) {
-        chopsticks[i] = std::make_unique<Chopstick>("Chopstick " + std::to_string(i), i);
-    }
-    
+    // Ask user for mode selection
+    int choice;
+    std::cout << "\nSelect an option:" << std::endl;
+    std::cout << "1. Run with 5 philosophers (with visualization)" << std::endl;
+    std::cout << "2. Run with custom number of philosophers" << std::endl;
+    std::cout << "Enter your choice (1 or 2): ";
+    std::cin >> choice;
+
+    int numPhilosophers;
+    bool showVisualization = false;   //(true only for 5 phil.) 
+
+
+        
     // Create philosophers and assign chopsticks
     std::cout << "\n=== Philosophers at the table: ===" << std::endl;
     for (int i = 0; i < NUM_PHILOSOPHERS; i++) {
